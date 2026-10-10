@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triumph Property BD - Field Data Collection Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 10mm 12mm 12mm 12mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', 'Hind Siliguri', 'Segoe UI', Tahoma, sans-serif;
+      color: #111111;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 15px;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.45;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .print-btn-bar {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .print-btn {
+      background-color: #0b6638;
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      font-family: inherit;
+    }
+
+    .print-btn:hover {
+      background-color: #084c2a;
+    }
+
+    .page-container {
+      max-width: 210mm;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 12mm 15mm;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .watermark {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-15deg);
+      width: 520px;
+      height: 520px;
+      background-image: url('../../logo.webp');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      opacity: 0.055;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    table.print-layout {
+      width: 100%;
+      border-collapse: collapse;
+      border: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    table.print-layout > thead {
+      display: table-header-group;
+    }
+
+    table.print-layout > tfoot {
+      display: table-footer-group;
+    }
+
+    table.print-layout > tbody > tr > td {
+      border: none;
+      padding: 0;
+    }
+
+    /* Header Styling */
+    .header-content {
+      border-bottom: 2.5px solid #0b6638;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: transparent;
+    }
+
+    .header-logo {
+      width: 240px;
+      max-height: 60px;
+      object-fit: contain;
+    }
+
+    .footer-logo {
+      width: 140px;
+      max-height: 50px;
+      object-fit: contain;
+    }
+
+    .header-info {
+      text-align: right;
+      font-size: 12px;
+      color: #111;
+      line-height: 1.4;
+      font-weight: 600;
+    }
+
+    .header-info strong {
+      color: #0b6638;
+      font-weight: 700;
+    }
+
+    /* Footer Styling */
+    .footer-spacer {
+      height: 55px;
+      border: none;
+      padding: 0;
+    }
+
+    .footer-content {
+      border-top: 2px solid #0b6638;
+      padding-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #333;
+      font-weight: 600;
+      background-color: #ffffff;
+      width: 100%;
+    }
+
+    .footer-content .tagline {
+      color: #0b6638;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-title-banner {
+      background-color: #0b6638;
+      color: #ffffff;
+      text-align: center;
+      padding: 6px 8px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 3px;
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    .section-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0b6638;
+      background-color: rgba(234, 245, 238, 0.9);
+      border-left: 5px solid #d9252a;
+      padding: 4px 8px;
+      margin-top: 16px;
+      margin-bottom: 6px;
+      border-radius: 0 3px 3px 0;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 4px;
+      font-size: 12.5px;
+      background-color: transparent;
+    }
+
+    .data-table td, .data-table th {
+      border: 1.2px solid #9aa9b5;
+      padding: 6px 8px;
+      vertical-align: middle;
+      height: 32px;
+    }
+
+    .data-table th {
+      background-color: rgba(235, 240, 243, 0.9);
+      color: #000;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .lbl {
+      background-color: rgba(245, 248, 250, 0.9);
+      color: #1a252f;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    .dot-line {
+      display: block;
+      width: 100%;
+      height: 20px;
+      border-bottom: 1.5px dotted #555;
+    }
+
+    .inline-dots {
+      display: inline-block;
+      border-bottom: 1.5px dotted #555;
+      min-width: 90px;
+      height: 18px;
+      vertical-align: bottom;
+    }
+
+    .multi-dot-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 6px 0 3px 0;
+    }
+
+    .multi-dot-lines .dot-line {
+      height: 14px;
+    }
+
+    .checkbox-item {
+      display: inline-block;
+      margin-right: 12px;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .box {
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      border: 1.5px solid #222;
+      border-radius: 2px;
+      vertical-align: middle;
+      margin-right: 4px;
+      margin-top: -3px;
+    }
+
+    .signature-section {
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      page-break-inside: avoid;
+    }
+
+    .signature-box {
+      width: 45%;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .signature-line {
+      border-top: 1.5px dotted #222;
+      margin-bottom: 8px;
+      padding-top: 6px;
+    }
+
+    .keep-together {
+      page-break-inside: avoid;
+    }
+
+    @media print {
+      body {
+        background-color: #ffffff;
+        padding: 0;
+      }
+      .page-container {
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+        background: transparent;
+        overflow: visible;
+      }
+      .print-btn-bar {
+        display: none;
+      }
+      .watermark {
+        opacity: 0.055;
+      }
+      .footer-content {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: #ffffff;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-btn-bar">
+    <button class="print-btn" onclick="window.print()">🖨️ প্রিন্ট করুন অথবা PDF হিসেবে সেভ করুন</button>
+  </div>
+
+  <div class="page-container">
+    <div class="watermark"></div>
+
+    <table class="print-layout">
+      <!-- HEADER -->
+      <thead>
+        <tr>
+          <th style="border: none; padding: 0; text-align: left; font-weight: normal;">
+            <div class="header-content">
+              <img src="../../logo.webp" alt="Triumph Property Bangladesh" class="header-logo">
+              <div class="header-info">
+                <strong>হেড অফিস:</strong> ৭৫৬, মান্ডা মেইন রোড, ঢাকা-১২১৪<br>
+                <strong>খুলনা অফিস:</strong> বাড়ি# ডি-১১, রোড# ১২৩, খালিশপুর হাউজিং এস্টেট<br>
+                <strong>হটলাইন:</strong> +৮৮০ ১৭১০-৭০৭৩২২ &nbsp;|&nbsp; <strong>ইমেইল:</strong> triumphpropertybd@gmail.com
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+
+      <!-- FOOTER -->
+      <tfoot>
+        <tr>
+          <td class="footer-spacer">
+            <div class="footer-content">
+              <div class="tagline">
+                <img src="../../logo.webp" alt="Triumph Property Bangladesh" class="footer-logo">
+              </div>
+              <div style="text-align: right; line-height: 1.4;">
+                <strong>হেড অফিস:</strong> ৭৫৬, মান্ডা মেইন রোড, ঢাকা-১২১৪<br>
+                <strong>খুলনা অফিস:</strong> বাড়ি# ডি-১১, রোড# ১২৩, খালিশপুর হাউজিং এস্টেট<br>
+                <strong>হটলাইন:</strong> +৮৮০ ১৭১০-৭০৭৩২২
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+
+      <!-- FORM CONTENT -->
+      <tbody>
+        <tr>
+          <td>
+            
+            <div class="form-title-banner">সাইট ভিজিট ও প্রপার্টি ডাটা কালেকশন ফর্ম</div>
+
+            <!-- Metadata Section -->
+            <table class="data-table">
+              <tr>
+                <td class="lbl" style="width: 18%;">ভিজিটের তারিখ:</td>
+                <td style="width: 32%;"><span class="dot-line"></span></td>
+                <td class="lbl" style="width: 20%;">তথ্য সংগ্রহকারীর নাম:</td>
+                <td style="width: 30%;"><span class="dot-line"></span></td>
+              </tr>
+              <tr>
+                <td class="lbl">স্টাফ আইডি ও পদবি:</td>
+                <td><span class="dot-line"></span></td>
+                <td class="lbl">প্রপার্টির ধরন:</td>
+                <td>
+                  <span class="checkbox-item"><span class="box"></span> ফ্ল্যাট</span>
+                  <span class="checkbox-item"><span class="box"></span> বাড়ি</span>
+                  <span class="checkbox-item"><span class="box"></span> জমি</span>
+                  <span class="checkbox-item"><span class="box"></span> বাণিজ্যিক</span>
+                </td>
+              </tr>
+            </table>
+
+            <!-- 1. Contact Info -->
+            <div class="keep-together">
+              <div class="section-title">১. মালিক / ডেভেলপার / কন্টাক্ট পারসনের তথ্য</div>
+              <table class="data-table">
+                <tr>
+                  <td class="lbl" style="width: 24%;">মালিক / প্রতিষ্ঠানের নাম:</td>
+                  <td colspan="3"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">যোগাযোগকারীর ধরন:</td>
+                  <td style="width: 30%;">
+                    <span class="checkbox-item"><span class="box"></span> মূল মালিক</span>
+                    <span class="checkbox-item"><span class="box"></span> ডেভেলপার</span>
+                    <span class="checkbox-item"><span class="box"></span> প্রতিনিধি</span>
+                  </td>
+                  <td class="lbl" style="width: 18%;">মোবাইল নম্বর:</td>
+                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">হোয়াটসঅ্যাপ / বিকল্প নম্বর:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">ইমেইল অ্যাড্রেস:</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">বর্তমান / স্থায়ী ঠিকানা:</td>
+                  <td colspan="3">
+                    <div class="multi-dot-lines">
+                      <span class="dot-line"></span>
+                      <span class="dot-line"></span>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- 2. Project Info -->
+            <div class="keep-together">
+              <div class="section-title">২. প্রজেক্ট ও ভবনের সাধারণ তথ্য</div>
+              <table class="data-table">
+                <tr>
+                  <td class="lbl" style="width: 22%;">প্রজেক্ট / ভবনের নাম:</td>
+                  <td colspan="3"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">সম্পূর্ণ ঠিকানা:</td>
+                  <td colspan="3">
+                    <div class="multi-dot-lines">
+                      <span class="dot-line"></span>
+                      <span class="dot-line"></span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="lbl">জমির পরিমাণ:</td>
+                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                  <td class="lbl" style="width: 22%;">ভবনের উচ্চতা ও তলা:</td>
+                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">প্রতি ফ্লোরে ইউনিট:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">প্রজেক্টে মোট ফ্ল্যাট:</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">নির্মাণ কাজের অবস্থা:</td>
+                  <td>
+                    <span class="checkbox-item"><span class="box"></span> রেডি</span>
+                    <span class="checkbox-item"><span class="box"></span> স্ট্রাকচার</span>
+                    <span class="checkbox-item"><span class="box"></span> ফিনিশিং</span>
+                  </td>
+                  <td class="lbl">সম্ভাব্য হস্তান্তর তারিখ:</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- 3. Specific Flat Info -->
+            <div class="keep-together">
+              <div class="section-title">৩. ফ্ল্যাটের সুনির্দিষ্ট স্পেসিফিকেশন</div>
+              <table class="data-table">
+                <tr>
+                  <td class="lbl" style="width: 22%;">গ্রস সাইজ (Gross SFT):</td>
+                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                  <td class="lbl" style="width: 22%;">নেট সাইজ (Net SFT):</td>
+                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">তলা ও ইউনিট নম্বর:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">ফ্ল্যাটের মুখ (Facing):</td>
+                  <td>
+                    <span class="checkbox-item"><span class="box"></span> উত্তর</span>
+                    <span class="checkbox-item"><span class="box"></span> দক্ষিণ</span>
+                    <span class="checkbox-item"><span class="box"></span> পূর্ব</span>
+                    <span class="checkbox-item"><span class="box"></span> পশ্চিম</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="lbl">বেডরুম সংখ্যা:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">বাথরুম সংখ্যা:</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">বারান্দা (Balcony):</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">ড্রয়িং ও ডাইনিং:</td>
+                  <td>
+                    <span class="checkbox-item"><span class="box"></span> যৌথ</span>
+                    <span class="checkbox-item"><span class="box"></span> আলাদা</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="lbl">রান্নাঘর সংখ্যা:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">সার্ভেন্ট বেড ও টয়লেট:</td>
+                  <td>
+                    <span class="checkbox-item"><span class="box"></span> আছে</span>
+                    <span class="checkbox-item"><span class="box"></span> নেই</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="lbl">টাইলস ও ফিটিংসের মান:</td>
+                  <td colspan="3"><span class="dot-line"></span></td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- 4. Pricing & Payment -->
+            <div class="keep-together">
+              <div class="section-title">৪. মূল্য ও পেমেন্ট কাঠামো (Pricing & Financial Terms)</div>
+              <table class="data-table">
+                <tr>
+                  <td class="lbl" style="width: 24%;">প্রতি বর্গফুট মূল্য (Per SFT):</td>
+                  <td style="width: 26%;"><span class="dot-line"></span></td>
+                  <td class="lbl" style="width: 22%;">ফ্ল্যাটের মূল দাম:</td>
+                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">গাড়ি পার্কিং চার্জ:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">ইউটিলিটি চার্জ:</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">সর্বমোট প্যাকেজ মূল্য:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">দাম আলোচনা সাপেক্ষ?</td>
+                  <td>
+                    <span class="checkbox-item"><span class="box"></span> ফিক্সড</span>
+                    <span class="checkbox-item"><span class="box"></span> আলোচনা সাপেক্ষ</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="lbl">বুকিং মানির পরিমাণ:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">ডাউন পেমেন্ট (% / টাকা):</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">কিস্তির সুবিধা ও সময়:</td>
+                  <td colspan="3"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">ব্যাংক লোন সুবিধা:</td>
+                  <td colspan="3">
+                    <span class="checkbox-item"><span class="box"></span> ব্যাংক লোন প্রযোজ্য</span>
+                    <span class="checkbox-item"><span class="box"></span> ব্যাংক অনুমোদিত প্রজেক্ট</span>
+                    &nbsp;|&nbsp; সম্ভাব্য শতকরা হার: <span class="inline-dots"></span> %
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- 5. Amenities -->
+            <div class="keep-together">
+              <div class="section-title">৫. ভবনের নাগরিক সুবিধাসমূহ ও ইউটিলিটি</div>
+              <table class="data-table">
+                <tr>
+                  <td style="width: 33.33%;">
+                    <strong>লিফট (Lift):</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> আছে</span>
+                    <span class="checkbox-item"><span class="box"></span> নেই</span><br>
+                    ক্যাপাসিটি/ব্র্যান্ড: <span class="inline-dots" style="min-width: 80px;"></span>
+                  </td>
+                  <td style="width: 33.33%;">
+                    <strong>জেনারেটর ব্যাকআপ:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> ফুল ফ্ল্যাট</span>
+                    <span class="checkbox-item"><span class="box"></span> লিফট ও ফ্যান-লাইট</span><br>
+                    <span class="checkbox-item"><span class="box"></span> নেই</span>
+                  </td>
+                  <td style="width: 33.33%;">
+                    <strong>বিদ্যুৎ ও সাবস্টেশন:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> নিজস্ব সাবস্টেশন</span>
+                    <span class="checkbox-item"><span class="box"></span> সাধারণ লাইন</span><br>
+                    <span class="checkbox-item"><span class="box"></span> প্রিপেইড</span>
+                    <span class="checkbox-item"><span class="box"></span> পোস্টপেইড</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>গ্যাস সংযোগ:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> তিতাস সরকারি লাইন</span><br>
+                    <span class="checkbox-item"><span class="box"></span> এলপিজি সেন্ট্রাল</span>
+                    <span class="checkbox-item"><span class="box"></span> সিলিন্ডার</span>
+                  </td>
+                  <td>
+                    <strong>পানি সরবরাহ:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> ওয়াসা (WASA) লাইন</span><br>
+                    <span class="checkbox-item"><span class="box"></span> নিজস্ব গভীর নলকূপ</span>
+                  </td>
+                  <td>
+                    <strong>নিরাপত্তা ও সিসিটিভি:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> ২৪ ঘণ্টা গার্ড</span>
+                    <span class="checkbox-item"><span class="box"></span> সিসিটিভি</span><br>
+                    <span class="checkbox-item"><span class="box"></span> ইন্টারকম</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>অগ্নিনির্বাপক ব্যবস্থা:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> ফায়ার হাইড্রেন্ট / সিলিন্ডার</span><br>
+                    <span class="checkbox-item"><span class="box"></span> জরুরি এক্সিট সিঁড়ি</span>
+                  </td>
+                  <td>
+                    <strong>ছাদের সুবিধা:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> রুফটপ গার্ডেন</span><br>
+                    <span class="checkbox-item"><span class="box"></span> কমিউনিটি স্পেস</span>
+                  </td>
+                  <td>
+                    <strong>অন্যান্য সুবিধা:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> গার্ড ও ড্রাইভার রুম</span><br>
+                    <span class="checkbox-item"><span class="box"></span> সোলার সিস্টেম</span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- 6. Location & Access -->
+            <div class="keep-together">
+              <div class="section-title">৬. লোকেশন, অ্যাক্সেস রোড ও পরিপার্শ্বিক তথ্য</div>
+              <table class="data-table">
+                <tr>
+                  <td class="lbl" style="width: 24%;">সামনের রাস্তার প্রশস্ততা:</td>
+                  <td style="width: 26%;"><span class="dot-line"></span></td>
+                  <td class="lbl" style="width: 22%;">মেইন রোড থেকে দূরত্ব:</td>
+                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">নিকটস্থ ল্যান্ডমার্ক / মোড়:</td>
+                  <td colspan="3"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">নিকটবর্তী শিক্ষা প্রতিষ্ঠান:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">নিকটবর্তী হাসপাতাল:</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">কাঁচাবাজার / শপিং মল:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">মসজিদ / উপাসনালয়:</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">গুগল ম্যাপ স্থানাঙ্ক / পিন:</td>
+                  <td colspan="3"><span class="dot-line"></span></td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- 7. Legal Checklist -->
+            <div class="keep-together">
+              <div class="section-title">৭. আইনি ও ডকুমেন্টস যাচাইকরণ চেকলিস্ট (Legal & Compliance)</div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 38%; text-align: left;">ডকুমেন্টের বিবরণ</th>
+                    <th style="width: 26%; text-align: left;">ডকুমেন্টের স্থিতি</th>
+                    <th style="width: 36%; text-align: left;">নম্বর / অফিসিয়াল মন্তব্য</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>১. মূল মালিকানা দলিল (CS/SA/RS/BS)</td>
+                    <td style="text-align: left;">
+                      <span class="checkbox-item"><span class="box"></span> যাচাইকৃত</span>
+                      <span class="checkbox-item"><span class="box"></span> পেন্ডিং</span>
+                    </td>
+                    <td><span class="dot-line"></span></td>
+                  </tr>
+                  <tr>
+                    <td>২. খতিয়ান ও মিউটেশন (নামজারি ও DCR)</td>
+                    <td style="text-align: left;">
+                      <span class="checkbox-item"><span class="box"></span> সম্পূর্ণ</span>
+                      <span class="checkbox-item"><span class="box"></span> অসম্পূর্ণ</span>
+                    </td>
+                    <td><span class="dot-line"></span></td>
+                  </tr>
+                  <tr>
+                    <td>৩. ভূমি উন্নয়ন কর (হাল খাজনা দাখিলা)</td>
+                    <td style="text-align: left;">
+                      <span class="checkbox-item"><span class="box"></span> পরিশোধিত</span>
+                      <span class="checkbox-item"><span class="box"></span> বকেয়া</span>
+                    </td>
+                    <td><span class="dot-line"></span></td>
+                  </tr>
+                  <tr>
+                    <td>৪. রাজউক / পৌরসভা অনুমোদিত প্ল্যান</td>
+                    <td style="text-align: left;">
+                      <span class="checkbox-item"><span class="box"></span> অনুমোদিত</span>
+                      <span class="checkbox-item"><span class="box"></span> প্রক্রিয়াধীন</span>
+                    </td>
+                    <td><span class="dot-line"></span></td>
+                  </tr>
+                  <tr>
+                    <td>৫. ডেভেলপারের সাথে রেজিস্টার্ড চুক্তি / পাওয়ার</td>
+                    <td style="text-align: left;">
+                      <span class="checkbox-item"><span class="box"></span> রেজিস্ট্রিকৃত</span>
+                      <span class="checkbox-item"><span class="box"></span> প্রযোজ্য নয়</span>
+                    </td>
+                    <td><span class="dot-line"></span></td>
+                  </tr>
+                  <tr>
+                    <td>৬. ব্যাংক দায়দেনা / মামলা / নিষেধাজ্ঞা (NEC)</td>
+                    <td style="text-align: left;">
+                      <span class="checkbox-item"><span class="box"></span> নির্ভেজাল</span>
+                      <span class="checkbox-item"><span class="box"></span> মর্টগেজ আছে</span>
+                    </td>
+                    <td><span class="dot-line"></span></td>
+                  </tr>
+                  <tr>
+                    <td>৭. ফ্ল্যাটের সাথে জমির আনুপাতিক হিস্যা</td>
+                    <td style="text-align: left;">
+                      <span class="checkbox-item"><span class="box"></span> সাফ-কবলা</span>
+                    </td>
+                    <td><span class="dot-line"></span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 8. Media & Field Notes -->
+            <div class="keep-together">
+              <div class="section-title">৮. মিডিয়া চেকলিস্ট ও ফিল্ড নোট</div>
+              <table class="data-table">
+                <tr>
+                  <td style="width: 33.33%;">
+                    <strong>ছবি ও ভিডিও চেকলিস্ট:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> সম্মুখ ভিউ (Elevation)</span><br>
+                    <span class="checkbox-item"><span class="box"></span> রুম, কিচেন ও বাথরুম</span><br>
+                    <span class="checkbox-item"><span class="box"></span> রাস্তা ও পার্কিং এরিয়া</span>
+                  </td>
+                  <td style="width: 33.33%;">
+                    <strong>নকশা ও ব্রোশিউর সংগ্রহ:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> অনুমোদিত ফ্লোর প্ল্যান</span><br>
+                    <span class="checkbox-item"><span class="box"></span> ৩ডি ভিউ / ক্যাটালগ</span><br>
+                    <span class="checkbox-item"><span class="box"></span> পেমেন্ট শিডিউল</span>
+                  </td>
+                  <td style="width: 33.33%;">
+                    <strong>ফিল্ড অফিসারের গ্রেডিং:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> গ্রেড A (হট ডিল)</span><br>
+                    <span class="checkbox-item"><span class="box"></span> গ্রেড B (মধ্যম)</span><br>
+                    <span class="checkbox-item"><span class="box"></span> গ্রেড C (যাচাই প্রয়োজন)</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="lbl">অফিসারের বিশেষ পর্যবেক্ষণ ও নোট:</td>
+                  <td colspan="2">
+                    <div class="multi-dot-lines" style="padding: 6px 0;">
+                      <span class="dot-line"></span>
+                      <span class="dot-line"></span>
+                      <span class="dot-line"></span>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- Signatures -->
+            <div class="signature-section keep-together">
+              <div class="signature-box">
+                <div class="signature-line">তথ্য প্রদানকারী / বিক্রেতা / প্রতিনিধির স্বাক্ষর</div>
+                তারিখ: <span class="inline-dots" style="min-width: 140px;"></span>
+              </div>
+              <div class="signature-box">
+                <div class="signature-line">ফিল্ড অফিসার / ট্রায়াম্ফ প্রপার্টি প্রতিনিধির স্বাক্ষর</div>
+                তারিখ: <span class="inline-dots" style="min-width: 140px;"></span>
+              </div>
+            </div>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

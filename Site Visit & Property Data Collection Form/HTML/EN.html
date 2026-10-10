@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triumph Property BD - Field Data Collection Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 10mm 12mm 12mm 12mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+      color: #111111;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 15px;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.45;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .print-btn-bar {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .print-btn {
+      background-color: #0b6638;
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      font-family: inherit;
+    }
+
+    .print-btn:hover {
+      background-color: #084c2a;
+    }
+
+    .page-container {
+      max-width: 210mm;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 12mm 15mm;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .watermark {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-15deg);
+      width: 520px;
+      height: 520px;
+      background-image: url('../../logo.webp');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      opacity: 0.055;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    table.print-layout {
+      width: 100%;
+      border-collapse: collapse;
+      border: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    table.print-layout > thead {
+      display: table-header-group;
+    }
+
+    table.print-layout > tfoot {
+      display: table-footer-group;
+    }
+
+    table.print-layout > tbody > tr > td {
+      border: none;
+      padding: 0;
+    }
+
+    /* Header Styling */
+    .header-content {
+      border-bottom: 2.5px solid #0b6638;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: transparent;
+    }
+
+    .header-logo {
+      width: 240px;
+      max-height: 60px;
+      object-fit: contain;
+    }
+
+    .footer-logo {
+      width: 140px;
+      max-height: 50px;
+      object-fit: contain;
+    }
+
+    .header-info {
+      text-align: right;
+      font-size: 12px;
+      color: #111;
+      line-height: 1.4;
+      font-weight: 600;
+    }
+
+    .header-info strong {
+      color: #0b6638;
+      font-weight: 700;
+    }
+
+    /* Footer Styling */
+    .footer-spacer {
+      height: 55px;
+      border: none;
+      padding: 0;
+    }
+
+    .footer-content {
+      border-top: 2px solid #0b6638;
+      padding-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #333;
+      font-weight: 600;
+      background-color: #ffffff;
+      width: 100%;
+    }
+
+    .footer-content .tagline {
+      color: #0b6638;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-title-banner {
+      background-color: #0b6638;
+      color: #ffffff;
+      text-align: center;
+      padding: 6px 8px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 3px;
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    .section-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0b6638;
+      background-color: rgba(234, 245, 238, 0.9);
+      border-left: 5px solid #d9252a;
+      padding: 4px 8px;
+      margin-top: 16px;
+      margin-bottom: 6px;
+      border-radius: 0 3px 3px 0;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 4px;
+      font-size: 12.5px;
+      background-color: transparent;
+    }
+
+    .data-table td, .data-table th {
+      border: 1.2px solid #9aa9b5;
+      padding: 6px 8px;
+      vertical-align: middle;
+      height: 32px;
+    }
+
+    .data-table th {
+      background-color: rgba(235, 240, 243, 0.9);
+      color: #000;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .lbl {
+      background-color: rgba(245, 248, 250, 0.9);
+      color: #1a252f;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    .dot-line {
+      display: block;
+      width: 100%;
+      height: 20px;
+      border-bottom: 1.5px dotted #555;
+    }
+
+    .inline-dots {
+      display: inline-block;
+      border-bottom: 1.5px dotted #555;
+      min-width: 90px;
+      height: 18px;
+      vertical-align: bottom;
+    }
+
+    .multi-dot-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 6px 0 3px 0;
+    }
+
+    .multi-dot-lines .dot-line {
+      height: 14px;
+    }
+
+    .checkbox-item {
+      display: inline-block;
+      margin-right: 12px;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .box {
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      border: 1.5px solid #222;
+      border-radius: 2px;
+      vertical-align: middle;
+      margin-right: 4px;
+      margin-top: -3px;
+    }
+
+    .signature-section {
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      page-break-inside: avoid;
+    }
+
+    .signature-box {
+      width: 45%;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .signature-line {
+      border-top: 1.5px dotted #222;
+      margin-bottom: 8px;
+      padding-top: 6px;
+    }
+
+    .keep-together {
+      page-break-inside: avoid;
+    }
+
+    @media print {
+      body {
+        background-color: #ffffff;
+        padding: 0;
+      }
+      .page-container {
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+        background: transparent;
+        overflow: visible;
+      }
+      .print-btn-bar {
+        display: none;
+      }
+      .watermark {
+        opacity: 0.055;
+      }
+      .footer-content {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: #ffffff;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-btn-bar">
+    <button class="print-btn" onclick="window.print()">🖨️ Print or Save as PDF</button>
+  </div>
+
+  <div class="page-container">
+    <div class="watermark"></div>
+
+    <table class="print-layout">
+      <!-- HEADER -->
+      <thead>
+        <tr>
+          <th style="border: none; padding: 0; text-align: left; font-weight: normal;">
+            <div class="header-content">
+              <img src="../../logo.webp" alt="Triumph Property Bangladesh" class="header-logo">
+              <div class="header-info">
+                <strong>Head Office:</strong> 756, Manda Main Road, Dhaka-1214<br>
+                <strong>Khulna Office:</strong> House# D-11, Road# 123, Khalishpur Housing Estate<br>
+                <strong>Hotline:</strong> +880 1710-707322 &nbsp;|&nbsp; <strong>Email:</strong> triumphpropertybd@gmail.com
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+
+      <!-- FOOTER -->
+      <tfoot>
+        <tr>
+          <td class="footer-spacer">
+            <div class="footer-content">
+              <div class="tagline">
+                <img src="../../logo.webp" alt="Triumph Property Bangladesh" class="footer-logo">
+              </div>
+              <div style="text-align: right; line-height: 1.4;">
+                <strong>Head Office:</strong> 756, Manda Main Road, Dhaka-1214<br>
+                <strong>Khulna Office:</strong> House# D-11, Road# 123, Khalishpur Housing Estate<br>
+                <strong>Hotline:</strong> +880 1710-707322
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+
+      <!-- FORM CONTENT -->
+      <tbody>
+        <tr>
+          <td>
+            
+            <div class="form-title-banner">Site Visit & Property Data Collection Form</div>
+
+            <!-- Metadata Section -->
+            <table class="data-table">
+              <tr>
+                <td class="lbl" style="width: 18%;">Visit Date:</td>
+                <td style="width: 32%;"><span class="dot-line"></span></td>
+                <td class="lbl" style="width: 20%;">Collector Name:</td>
+                <td style="width: 30%;"><span class="dot-line"></span></td>
+              </tr>
+              <tr>
+                <td class="lbl">Staff ID & Designation:</td>
+                <td><span class="dot-line"></span></td>
+                <td class="lbl">Property Type:</td>
+                <td>
+                  <span class="checkbox-item"><span class="box"></span> Flat/Apartment</span>
+                  <span class="checkbox-item"><span class="box"></span> Building/House</span>
+                  <span class="checkbox-item"><span class="box"></span> Land</span>
+                  <span class="checkbox-item"><span class="box"></span> Commercial</span>
+                </td>
+              </tr>
+            </table>
+
+            <!-- 1. Contact Info -->
+            <div class="keep-together">
+              <div class="section-title">1. Owner / Developer / Contact Person Information</div>
+              <table class="data-table">
+                <tr>
+                  <td class="lbl" style="width: 24%;">Owner / Company Name:</td>
+                  <td colspan="3"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Contact Person Role:</td>
+                  <td style="width: 30%;">
+                    <span class="checkbox-item"><span class="box"></span> Primary Owner</span>
+                    <span class="checkbox-item"><span class="box"></span> Developer</span>
+                    <span class="checkbox-item"><span class="box"></span> Representative</span>
+                  </td>
+                  <td class="lbl" style="width: 18%;">Mobile Number:</td>
+                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">WhatsApp / Alt Number:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">Email Address:</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Present / Permanent Address:</td>
+                  <td colspan="3">
+                    <div class="multi-dot-lines">
+                      <span class="dot-line"></span>
+                      <span class="dot-line"></span>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- 2. Project Info -->
+            <div class="keep-together">
+              <div class="section-title">2. General Project & Building Information</div>
+              <table class="data-table">
+                <tr>
+                  <td class="lbl" style="width: 22%;">Project / Building Name:</td>
+                  <td colspan="3"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Complete Address:</td>
+                  <td colspan="3">
+                    <div class="multi-dot-lines">
+                      <span class="dot-line"></span>
+                      <span class="dot-line"></span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="lbl">Land Area:</td>
+                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                  <td class="lbl" style="width: 22%;">Building Height & Stories:</td>
+                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Units Per Floor:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">Total Flats in Project:</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Construction Status:</td>
+                  <td>
+                    <span class="checkbox-item"><span class="box"></span> Ready</span>
+                    <span class="checkbox-item"><span class="box"></span> Structure</span>
+                    <span class="checkbox-item"><span class="box"></span> Finishing</span>
+                  </td>
+                  <td class="lbl">Expected Handover Date:</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- 3. Specific Flat Info -->
+            <div class="keep-together">
+              <div class="section-title">3. Specific Flat Specifications</div>
+              <table class="data-table">
+                <tr>
+                  <td class="lbl" style="width: 22%;">Gross Size (Gross SFT):</td>
+                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                  <td class="lbl" style="width: 22%;">Net Size (Net SFT):</td>
+                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Floor & Unit No:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">Flat Facing:</td>
+                  <td>
+                    <span class="checkbox-item"><span class="box"></span> North</span>
+                    <span class="checkbox-item"><span class="box"></span> South</span>
+                    <span class="checkbox-item"><span class="box"></span> East</span>
+                    <span class="checkbox-item"><span class="box"></span> West</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="lbl">Number of Bedrooms:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">Number of Bathrooms:</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Balcony Count:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">Drawing & Dining:</td>
+                  <td>
+                    <span class="checkbox-item"><span class="box"></span> Combined</span>
+                    <span class="checkbox-item"><span class="box"></span> Separate</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="lbl">Number of Kitchens:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">Servant Bed & Toilet:</td>
+                  <td>
+                    <span class="checkbox-item"><span class="box"></span> Available</span>
+                    <span class="checkbox-item"><span class="box"></span> None</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="lbl">Tiles & Fittings Quality:</td>
+                  <td colspan="3"><span class="dot-line"></span></td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- 4. Pricing & Payment -->
+            <div class="keep-together">
+              <div class="section-title">4. Pricing & Financial Terms</div>
+              <table class="data-table">
+                <tr>
+                  <td class="lbl" style="width: 24%;">Price Per Sq. Ft. (Per SFT):</td>
+                  <td style="width: 26%;"><span class="dot-line"></span></td>
+                  <td class="lbl" style="width: 22%;">Base Flat Price:</td>
+                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Car Parking Charge:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">Utility Charge:</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Total Package Price:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">Price Negotiable?</td>
+                  <td>
+                    <span class="checkbox-item"><span class="box"></span> Fixed</span>
+                    <span class="checkbox-item"><span class="box"></span> Negotiable</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="lbl">Booking Money:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">Down Payment (% / Amount):</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Installment Facility & Period:</td>
+                  <td colspan="3"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Bank Loan Facility:</td>
+                  <td colspan="3">
+                    <span class="checkbox-item"><span class="box"></span> Bank Loan Applicable</span>
+                    <span class="checkbox-item"><span class="box"></span> Bank Approved Project</span>
+                    &nbsp;|&nbsp; Estimated Percentage: <span class="inline-dots"></span> %
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- 5. Amenities -->
+            <div class="keep-together">
+              <div class="section-title">5. Building Amenities & Utilities</div>
+              <table class="data-table">
+                <tr>
+                  <td style="width: 33.33%;">
+                    <strong>Lift / Elevator:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> Available</span>
+                    <span class="checkbox-item"><span class="box"></span> None</span><br>
+                    Capacity / Brand: <span class="inline-dots" style="min-width: 80px;"></span>
+                  </td>
+                  <td style="width: 33.33%;">
+                    <strong>Generator Backup:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> Full Flat</span>
+                    <span class="checkbox-item"><span class="box"></span> Lift & Basic Lights/Fans</span><br>
+                    <span class="checkbox-item"><span class="box"></span> None</span>
+                  </td>
+                  <td style="width: 33.33%;">
+                    <strong>Electricity & Substation:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> Dedicated Substation</span>
+                    <span class="checkbox-item"><span class="box"></span> Regular Line</span><br>
+                    <span class="checkbox-item"><span class="box"></span> Prepaid</span>
+                    <span class="checkbox-item"><span class="box"></span> Postpaid</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Gas Connection:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> Titas Grid Line</span><br>
+                    <span class="checkbox-item"><span class="box"></span> Central LPG</span>
+                    <span class="checkbox-item"><span class="box"></span> Cylinder</span>
+                  </td>
+                  <td>
+                    <strong>Water Supply:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> WASA Line</span><br>
+                    <span class="checkbox-item"><span class="box"></span> Deep Tube-well</span>
+                  </td>
+                  <td>
+                    <strong>Security & CCTV:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> 24/7 Security Guard</span>
+                    <span class="checkbox-item"><span class="box"></span> CCTV</span><br>
+                    <span class="checkbox-item"><span class="box"></span> Intercom</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Fire Fighting System:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> Fire Hydrant / Extinguisher</span><br>
+                    <span class="checkbox-item"><span class="box"></span> Emergency Fire Exit</span>
+                  </td>
+                  <td>
+                    <strong>Rooftop Facilities:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> Rooftop Garden</span><br>
+                    <span class="checkbox-item"><span class="box"></span> Community Space</span>
+                  </td>
+                  <td>
+                    <strong>Other Facilities:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> Guard & Driver Room</span><br>
+                    <span class="checkbox-item"><span class="box"></span> Solar Power System</span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- 6. Location & Access -->
+            <div class="keep-together">
+              <div class="section-title">6. Location, Access Road & Vicinity Information</div>
+              <table class="data-table">
+                <tr>
+                  <td class="lbl" style="width: 24%;">Front Road Width:</td>
+                  <td style="width: 26%;"><span class="dot-line"></span></td>
+                  <td class="lbl" style="width: 22%;">Distance from Main Road:</td>
+                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Nearest Landmark / Crossing:</td>
+                  <td colspan="3"><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Nearby Educational Institutes:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">Nearby Hospitals:</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Local Market / Shopping Mall:</td>
+                  <td><span class="dot-line"></span></td>
+                  <td class="lbl">Mosque / Place of Worship:</td>
+                  <td><span class="dot-line"></span></td>
+                </tr>
+                <tr>
+                  <td class="lbl">Google Maps Coordinates / Pin:</td>
+                  <td colspan="3"><span class="dot-line"></span></td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- 7. Legal Checklist -->
+            <div class="keep-together">
+              <div class="section-title">7. Legal & Compliance Checklist</div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 38%; text-align: left;">Document Description</th>
+                    <th style="width: 26%; text-align: left;">Document Status</th>
+                    <th style="width: 36%; text-align: left;">Document No. / Official Remarks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1. Original Title Deed (CS / SA / RS / BS)</td>
+                    <td style="text-align: left;">
+                      <span class="checkbox-item"><span class="box"></span> Verified</span>
+                      <span class="checkbox-item"><span class="box"></span> Pending</span>
+                    </td>
+                    <td><span class="dot-line"></span></td>
+                  </tr>
+                  <tr>
+                    <td>2. Khatian & Mutation (Namzari & DCR)</td>
+                    <td style="text-align: left;">
+                      <span class="checkbox-item"><span class="box"></span> Complete</span>
+                      <span class="checkbox-item"><span class="box"></span> Incomplete</span>
+                    </td>
+                    <td><span class="dot-line"></span></td>
+                  </tr>
+                  <tr>
+                    <td>3. Land Development Tax (Up-to-date Khajna Receipt)</td>
+                    <td style="text-align: left;">
+                      <span class="checkbox-item"><span class="box"></span> Paid</span>
+                      <span class="checkbox-item"><span class="box"></span> Overdue</span>
+                    </td>
+                    <td><span class="dot-line"></span></td>
+                  </tr>
+                  <tr>
+                    <td>4. RAJUK / Municipality Approved Plan</td>
+                    <td style="text-align: left;">
+                      <span class="checkbox-item"><span class="box"></span> Approved</span>
+                      <span class="checkbox-item"><span class="box"></span> In Process</span>
+                    </td>
+                    <td><span class="dot-line"></span></td>
+                  </tr>
+                  <tr>
+                    <td>5. Registered Developer Agreement / Power of Attorney</td>
+                    <td style="text-align: left;">
+                      <span class="checkbox-item"><span class="box"></span> Registered</span>
+                      <span class="checkbox-item"><span class="box"></span> Not Applicable</span>
+                    </td>
+                    <td><span class="dot-line"></span></td>
+                  </tr>
+                  <tr>
+                    <td>6. Bank Liabilities / Encumbrances / NEC Status</td>
+                    <td style="text-align: left;">
+                      <span class="checkbox-item"><span class="box"></span> Clear / Unencumbered</span>
+                      <span class="checkbox-item"><span class="box"></span> Mortgaged</span>
+                    </td>
+                    <td><span class="dot-line"></span></td>
+                  </tr>
+                  <tr>
+                    <td>7. Proportionate Land Share with Flat</td>
+                    <td style="text-align: left;">
+                      <span class="checkbox-item"><span class="box"></span> Registered Sale Deed (Saf-Kabala)</span>
+                    </td>
+                    <td><span class="dot-line"></span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 8. Media & Field Notes -->
+            <div class="keep-together">
+              <div class="section-title">8. Media Checklist & Field Notes</div>
+              <table class="data-table">
+                <tr>
+                  <td style="width: 33.33%;">
+                    <strong>Photo & Video Checklist:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> Front Elevation</span><br>
+                    <span class="checkbox-item"><span class="box"></span> Rooms, Kitchen & Bathrooms</span><br>
+                    <span class="checkbox-item"><span class="box"></span> Road & Parking Area</span>
+                  </td>
+                  <td style="width: 33.33%;">
+                    <strong>Layout & Brochure Collection:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> Approved Floor Plan</span><br>
+                    <span class="checkbox-item"><span class="box"></span> 3D Render / Catalog</span><br>
+                    <span class="checkbox-item"><span class="box"></span> Payment Schedule</span>
+                  </td>
+                  <td style="width: 33.33%;">
+                    <strong>Field Officer Grading:</strong><br>
+                    <span class="checkbox-item"><span class="box"></span> Grade A (Hot Deal)</span><br>
+                    <span class="checkbox-item"><span class="box"></span> Grade B (Moderate)</span><br>
+                    <span class="checkbox-item"><span class="box"></span> Grade C (Needs Verification)</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="lbl">Officer's Special Remarks & Notes:</td>
+                  <td colspan="2">
+                    <div class="multi-dot-lines" style="padding: 6px 0;">
+                      <span class="dot-line"></span>
+                      <span class="dot-line"></span>
+                      <span class="dot-line"></span>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- Signatures -->
+            <div class="signature-section keep-together">
+              <div class="signature-box">
+                <div class="signature-line">Signature of Provider / Seller / Representative</div>
+                Date: <span class="inline-dots" style="min-width: 140px;"></span>
+              </div>
+              <div class="signature-box">
+                <div class="signature-line">Signature of Field Officer / Triumph Property Rep.</div>
+                Date: <span class="inline-dots" style="min-width: 140px;"></span>
+              </div>
+            </div>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
