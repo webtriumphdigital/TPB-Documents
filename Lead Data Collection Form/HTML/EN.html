@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triumph Property BD - Lead Data Collection Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4 portrait; margin: 8mm 10mm; }
+    * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body {
+      font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+      color: #111; background: #f4f6f8; margin: 0; padding: 15px;
+      font-size: 11.5px; font-weight: 500; line-height: 1.35;
+      text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
+    }
+    .print-btn-bar { text-align: center; margin-bottom: 12px; }
+    .print-btn {
+      background: #0b6638; color: #fff; border: 0; padding: 10px 24px;
+      font-size: 14px; font-weight: 600; border-radius: 4px; cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,.2); font-family: inherit;
+    }
+    .page-container {
+      max-width: 210mm; margin: 0 auto; padding: 8mm 12mm;
+      background: #fff; box-shadow: 0 3px 12px rgba(0,0,0,.08);
+      border-radius: 4px; position: relative;
+    }
+    .watermark {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-15deg);
+      width: 520px; height: 520px; background: url('../../logo.webp') center/contain no-repeat;
+      opacity: .055; pointer-events: none; z-index: 0;
+    }
+    .content { position: relative; z-index: 1; }
+    .header-content {
+      border-bottom: 2.5px solid #0b6638; padding-bottom: 7px; margin-bottom: 10px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .header-logo { width: 225px; max-height: 58px; object-fit: contain; }
+    .header-info { text-align: right; font-size: 10px; line-height: 1.4; font-weight: 600; }
+    .header-info strong { color: #0b6638; font-weight: 700; }
+    .form-title-banner {
+      background: rgba(234,245,238,.95); color: #0b6638; border: 1px solid #0b6638;
+      text-align: center; padding: 5px 8px;
+      font-size: 15px; font-weight: 700; border-radius: 3px; margin-bottom: 9px;
+      letter-spacing: .2px;
+    }
+    .lead-card {
+      border: 1.2px solid #738391; border-radius: 3px; padding: 7px 8px 6px;
+      margin-bottom: 10px; background: rgba(255,255,255,.92);
+      page-break-inside: avoid;
+    }
+    .lead-card:last-child { margin-bottom: 0; }
+    .card-heading {
+      color: #0b6638; background: rgba(234,245,238,.95);
+      border-left: 5px solid #d9252a; padding: 4px 7px; margin: 0 0 5px;
+      font-size: 12.5px; font-weight: 700;
+    }
+    .data-table { width: 100%; border-collapse: collapse; margin-bottom: 4px; }
+    .data-table td, .data-table th {
+      border: 1px solid #9aa9b5; padding: 5px 6px; vertical-align: middle; height: 28px;
+    }
+    .data-table th { background: rgba(235,240,243,.95); font-weight: 700; text-align: left; }
+    .lbl { width: 20%; background: rgba(245,248,250,.95); color: #1a252f; white-space: nowrap; font-weight: 600; }
+    .checkbox-item { display: inline-block; margin-right: 11px; white-space: nowrap; font-weight: 500; }
+    .box {
+      display: inline-block; width: 13px; height: 13px; border: 1.3px solid #222;
+      border-radius: 2px; vertical-align: middle; margin: -2px 3px 0 0;
+    }
+    .notes { height: 32px; vertical-align: top !important; }
+    .classification { background: rgba(255,248,231,.85); }
+    .footer {
+      border-top: 2px solid #0b6638; padding-top: 5px; margin-top: 8px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 9.5px; color: #333; font-weight: 600;
+    }
+    .footer img { width: 105px; max-height: 32px; object-fit: contain; }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .page-container { box-shadow: none; padding: 0; max-width: 100%; }
+      .print-btn-bar { display: none; }
+      .lead-card { break-inside: avoid; }
+      .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 4px 10mm 0;
+        background: #fff;
+        z-index: 2;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-btn-bar">
+    <button class="print-btn" onclick="window.print()">Print or Save as PDF</button>
+  </div>
+  <div class="page-container">
+    <div class="watermark"></div>
+    <div class="content">
+      <div class="header-content">
+        <img src="../../logo.webp" alt="Triumph Property Bangladesh" class="header-logo">
+        <div class="header-info">
+          <strong>Head Office:</strong> 756, Manda Main Road, Dhaka-1214<br>
+          <strong>Khulna Office:</strong> House# D-11, Road# 123, Khalishpur Housing Estate<br>
+          <strong>Hotline:</strong> +880 1710-707322 &nbsp;|&nbsp; <strong>Email:</strong> triumphpropertybd@gmail.com
+        </div>
+      </div>
+      <div class="form-title-banner">Lead Data Collection & Qualification Form</div>
+
+      <div class="lead-card">
+        <div class="card-heading">Lead 1 - Customer Information & Call Assessment</div>
+        <table class="data-table">
+          <tr><td class="lbl">Date:</td><td></td><td class="lbl">Time:</td><td></td></tr>
+          <tr><td class="lbl">Full Name:</td><td colspan="3"></td></tr>
+          <tr><td class="lbl">Primary Phone:</td><td colspan="3"></td></tr>
+          <tr><td class="lbl">Secondary Phone:</td><td colspan="3"></td></tr>
+          <tr><td class="lbl">Address:</td><td colspan="3"></td></tr>
+          <tr><td class="lbl">Purpose for Buying:</td><td colspan="3"></td></tr>
+          <tr>
+            <td class="lbl">Property Type:</td><td colspan="3">
+              <span class="checkbox-item"><span class="box"></span>Land</span><span class="checkbox-item"><span class="box"></span>Flat</span><span class="checkbox-item"><span class="box"></span>Commercial</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="lbl">Intended Use:</td><td>
+              <span class="checkbox-item"><span class="box"></span>Investment</span><span class="checkbox-item"><span class="box"></span>Living</span>
+            </td>
+            <td class="lbl">Approx. Investment:</td><td></td>
+          </tr>
+          <tr>
+            <td class="lbl">Payment Method:</td><td>
+              <span class="checkbox-item"><span class="box"></span>Cash</span><span class="checkbox-item"><span class="box"></span>Bank Loan</span>
+            </td>
+            <td class="lbl">Decision Time:</td><td></td>
+          </tr>
+          <tr><td class="lbl">Family Involvement:</td><td colspan="3"><span class="checkbox-item"><span class="box"></span>No</span><span class="checkbox-item"><span class="box"></span>Yes, who?</span> </td></tr>
+          <tr><td class="lbl">Profession:</td><td></td><td class="lbl">Other Agent Visit:</td><td><span class="checkbox-item"><span class="box"></span>No</span><span class="checkbox-item"><span class="box"></span>Yes</span></td></tr>
+          <tr class="classification"><td class="lbl">Lead Value:</td><td colspan="3"><span class="checkbox-item"><span class="box"></span>Valuable / Hot</span><span class="checkbox-item"><span class="box"></span>Medium</span><span class="checkbox-item"><span class="box"></span>Less Valuable</span><span class="checkbox-item"><span class="box"></span>Not Qualified</span></td></tr>
+          <tr><td class="lbl notes">Call Notes / Next Follow-up:</td><td colspan="3" class="notes"></td></tr>
+        </table>
+      </div>
+
+      <div class="lead-card">
+        <div class="card-heading">Lead 2 - Customer Information & Call Assessment</div>
+        <table class="data-table">
+          <tr><td class="lbl">Date:</td><td></td><td class="lbl">Time:</td><td></td></tr>
+          <tr><td class="lbl">Full Name:</td><td colspan="3"></td></tr>
+          <tr><td class="lbl">Primary Phone:</td><td colspan="3"></td></tr>
+          <tr><td class="lbl">Secondary Phone:</td><td colspan="3"></td></tr>
+          <tr><td class="lbl">Address:</td><td colspan="3"></td></tr>
+          <tr><td class="lbl">Purpose for Buying:</td><td colspan="3"></td></tr>
+          <tr><td class="lbl">Property Type:</td><td colspan="3"><span class="checkbox-item"><span class="box"></span>Land</span><span class="checkbox-item"><span class="box"></span>Flat</span><span class="checkbox-item"><span class="box"></span>Commercial</span></td></tr>
+          <tr><td class="lbl">Intended Use:</td><td><span class="checkbox-item"><span class="box"></span>Investment</span><span class="checkbox-item"><span class="box"></span>Living</span></td><td class="lbl">Approx. Investment:</td><td></td></tr>
+          <tr><td class="lbl">Payment Method:</td><td><span class="checkbox-item"><span class="box"></span>Cash</span><span class="checkbox-item"><span class="box"></span>Bank Loan</span></td><td class="lbl">Decision Time:</td><td></td></tr>
+          <tr><td class="lbl">Family Involvement:</td><td colspan="3"><span class="checkbox-item"><span class="box"></span>No</span><span class="checkbox-item"><span class="box"></span>Yes, who?</span> </td></tr>
+          <tr><td class="lbl">Profession:</td><td></td><td class="lbl">Other Agent Visit:</td><td><span class="checkbox-item"><span class="box"></span>No</span><span class="checkbox-item"><span class="box"></span>Yes</span></td></tr>
+          <tr class="classification"><td class="lbl">Lead Value:</td><td colspan="3"><span class="checkbox-item"><span class="box"></span>Valuable / Hot</span><span class="checkbox-item"><span class="box"></span>Medium</span><span class="checkbox-item"><span class="box"></span>Less Valuable</span><span class="checkbox-item"><span class="box"></span>Not Qualified</span></td></tr>
+          <tr><td class="lbl notes">Call Notes / Next Follow-up:</td><td colspan="3" class="notes"></td></tr>
+        </table>
+      </div>
+
+      <div class="footer">
+        <img src="../../logo.webp" alt="Triumph Property Bangladesh">
+        <div style="text-align:right;">Head Office: 756, Manda Main Road, Dhaka-1214<br>Hotline: +880 1710-707322</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

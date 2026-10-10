@@ -217,32 +217,6 @@
       font-weight: 600;
     }
 
-    .dot-line {
-      display: block;
-      width: 100%;
-      height: 20px;
-      border-bottom: 1.5px dotted #555;
-    }
-
-    .inline-dots {
-      display: inline-block;
-      border-bottom: 1.5px dotted #555;
-      min-width: 90px;
-      height: 18px;
-      vertical-align: bottom;
-    }
-
-    .multi-dot-lines {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding: 6px 0 3px 0;
-    }
-
-    .multi-dot-lines .dot-line {
-      height: 14px;
-    }
-
     .checkbox-item {
       display: inline-block;
       margin-right: 12px;
@@ -278,7 +252,6 @@
     }
 
     .signature-line {
-      border-top: 1.5px dotted #222;
       margin-bottom: 8px;
       padding-top: 6px;
     }
@@ -319,7 +292,7 @@
 <body>
 
   <div class="print-btn-bar">
-    <button class="print-btn" onclick="window.print()">🖨️ প্রিন্ট করুন অথবা PDF হিসেবে সেভ করুন</button>
+    <button class="print-btn" onclick="window.print()">প্রিন্ট করুন অথবা PDF হিসেবে সেভ করুন</button>
   </div>
 
   <div class="page-container">
@@ -371,13 +344,13 @@
             <table class="data-table">
               <tr>
                 <td class="lbl" style="width: 18%;">ভিজিটের তারিখ:</td>
-                <td style="width: 32%;"><span class="dot-line"></span></td>
+                <td style="width: 32%;"></td>
                 <td class="lbl" style="width: 20%;">তথ্য সংগ্রহকারীর নাম:</td>
-                <td style="width: 30%;"><span class="dot-line"></span></td>
+                <td style="width: 30%;"></td>
               </tr>
               <tr>
                 <td class="lbl">স্টাফ আইডি ও পদবি:</td>
-                <td><span class="dot-line"></span></td>
+                <td></td>
                 <td class="lbl">প্রপার্টির ধরন:</td>
                 <td>
                   <span class="checkbox-item"><span class="box"></span> ফ্ল্যাট</span>
@@ -394,7 +367,7 @@
               <table class="data-table">
                 <tr>
                   <td class="lbl" style="width: 24%;">মালিক / প্রতিষ্ঠানের নাম:</td>
-                  <td colspan="3"><span class="dot-line"></span></td>
+                  <td colspan="3"></td>
                 </tr>
                 <tr>
                   <td class="lbl">যোগাযোগকারীর ধরন:</td>
@@ -404,21 +377,17 @@
                     <span class="checkbox-item"><span class="box"></span> প্রতিনিধি</span>
                   </td>
                   <td class="lbl" style="width: 18%;">মোবাইল নম্বর:</td>
-                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                  <td style="width: 28%;"></td>
                 </tr>
                 <tr>
                   <td class="lbl">হোয়াটসঅ্যাপ / বিকল্প নম্বর:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                   <td class="lbl">ইমেইল অ্যাড্রেস:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td class="lbl">বর্তমান / স্থায়ী ঠিকানা:</td>
                   <td colspan="3">
-                    <div class="multi-dot-lines">
-                      <span class="dot-line"></span>
-                      <span class="dot-line"></span>
-                    </div>
                   </td>
                 </tr>
               </table>
@@ -430,28 +399,24 @@
               <table class="data-table">
                 <tr>
                   <td class="lbl" style="width: 22%;">প্রজেক্ট / ভবনের নাম:</td>
-                  <td colspan="3"><span class="dot-line"></span></td>
+                  <td colspan="3"></td>
                 </tr>
                 <tr>
                   <td class="lbl">সম্পূর্ণ ঠিকানা:</td>
                   <td colspan="3">
-                    <div class="multi-dot-lines">
-                      <span class="dot-line"></span>
-                      <span class="dot-line"></span>
-                    </div>
                   </td>
                 </tr>
                 <tr>
                   <td class="lbl">জমির পরিমাণ:</td>
-                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                  <td style="width: 28%;"></td>
                   <td class="lbl" style="width: 22%;">ভবনের উচ্চতা ও তলা:</td>
-                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                  <td style="width: 28%;"></td>
                 </tr>
                 <tr>
                   <td class="lbl">প্রতি ফ্লোরে ইউনিট:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                   <td class="lbl">প্রজেক্টে মোট ফ্ল্যাট:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td class="lbl">নির্মাণ কাজের অবস্থা:</td>
@@ -461,7 +426,7 @@
                     <span class="checkbox-item"><span class="box"></span> ফিনিশিং</span>
                   </td>
                   <td class="lbl">সম্ভাব্য হস্তান্তর তারিখ:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                 </tr>
               </table>
             </div>
@@ -472,13 +437,13 @@
               <table class="data-table">
                 <tr>
                   <td class="lbl" style="width: 22%;">গ্রস সাইজ (Gross SFT):</td>
-                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                  <td style="width: 28%;"></td>
                   <td class="lbl" style="width: 22%;">নেট সাইজ (Net SFT):</td>
-                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                  <td style="width: 28%;"></td>
                 </tr>
                 <tr>
                   <td class="lbl">তলা ও ইউনিট নম্বর:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                   <td class="lbl">ফ্ল্যাটের মুখ (Facing):</td>
                   <td>
                     <span class="checkbox-item"><span class="box"></span> উত্তর</span>
@@ -489,13 +454,13 @@
                 </tr>
                 <tr>
                   <td class="lbl">বেডরুম সংখ্যা:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                   <td class="lbl">বাথরুম সংখ্যা:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td class="lbl">বারান্দা (Balcony):</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                   <td class="lbl">ড্রয়িং ও ডাইনিং:</td>
                   <td>
                     <span class="checkbox-item"><span class="box"></span> যৌথ</span>
@@ -504,7 +469,7 @@
                 </tr>
                 <tr>
                   <td class="lbl">রান্নাঘর সংখ্যা:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                   <td class="lbl">সার্ভেন্ট বেড ও টয়লেট:</td>
                   <td>
                     <span class="checkbox-item"><span class="box"></span> আছে</span>
@@ -513,7 +478,7 @@
                 </tr>
                 <tr>
                   <td class="lbl">টাইলস ও ফিটিংসের মান:</td>
-                  <td colspan="3"><span class="dot-line"></span></td>
+                  <td colspan="3"></td>
                 </tr>
               </table>
             </div>
@@ -524,19 +489,19 @@
               <table class="data-table">
                 <tr>
                   <td class="lbl" style="width: 24%;">প্রতি বর্গফুট মূল্য (Per SFT):</td>
-                  <td style="width: 26%;"><span class="dot-line"></span></td>
+                  <td style="width: 26%;"></td>
                   <td class="lbl" style="width: 22%;">ফ্ল্যাটের মূল দাম:</td>
-                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                  <td style="width: 28%;"></td>
                 </tr>
                 <tr>
                   <td class="lbl">গাড়ি পার্কিং চার্জ:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                   <td class="lbl">ইউটিলিটি চার্জ:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td class="lbl">সর্বমোট প্যাকেজ মূল্য:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                   <td class="lbl">দাম আলোচনা সাপেক্ষ?</td>
                   <td>
                     <span class="checkbox-item"><span class="box"></span> ফিক্সড</span>
@@ -545,20 +510,20 @@
                 </tr>
                 <tr>
                   <td class="lbl">বুকিং মানির পরিমাণ:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                   <td class="lbl">ডাউন পেমেন্ট (% / টাকা):</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td class="lbl">কিস্তির সুবিধা ও সময়:</td>
-                  <td colspan="3"><span class="dot-line"></span></td>
+                  <td colspan="3"></td>
                 </tr>
                 <tr>
                   <td class="lbl">ব্যাংক লোন সুবিধা:</td>
                   <td colspan="3">
                     <span class="checkbox-item"><span class="box"></span> ব্যাংক লোন প্রযোজ্য</span>
                     <span class="checkbox-item"><span class="box"></span> ব্যাংক অনুমোদিত প্রজেক্ট</span>
-                    &nbsp;|&nbsp; সম্ভাব্য শতকরা হার: <span class="inline-dots"></span> %
+                    &nbsp;|&nbsp; সম্ভাব্য শতকরা হার:  %
                   </td>
                 </tr>
               </table>
@@ -573,7 +538,7 @@
                     <strong>লিফট (Lift):</strong><br>
                     <span class="checkbox-item"><span class="box"></span> আছে</span>
                     <span class="checkbox-item"><span class="box"></span> নেই</span><br>
-                    ক্যাপাসিটি/ব্র্যান্ড: <span class="inline-dots" style="min-width: 80px;"></span>
+                    ক্যাপাসিটি/ব্র্যান্ড: 
                   </td>
                   <td style="width: 33.33%;">
                     <strong>জেনারেটর ব্যাকআপ:</strong><br>
@@ -634,29 +599,29 @@
               <table class="data-table">
                 <tr>
                   <td class="lbl" style="width: 24%;">সামনের রাস্তার প্রশস্ততা:</td>
-                  <td style="width: 26%;"><span class="dot-line"></span></td>
+                  <td style="width: 26%;"></td>
                   <td class="lbl" style="width: 22%;">মেইন রোড থেকে দূরত্ব:</td>
-                  <td style="width: 28%;"><span class="dot-line"></span></td>
+                  <td style="width: 28%;"></td>
                 </tr>
                 <tr>
                   <td class="lbl">নিকটস্থ ল্যান্ডমার্ক / মোড়:</td>
-                  <td colspan="3"><span class="dot-line"></span></td>
+                  <td colspan="3"></td>
                 </tr>
                 <tr>
                   <td class="lbl">নিকটবর্তী শিক্ষা প্রতিষ্ঠান:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                   <td class="lbl">নিকটবর্তী হাসপাতাল:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td class="lbl">কাঁচাবাজার / শপিং মল:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                   <td class="lbl">মসজিদ / উপাসনালয়:</td>
-                  <td><span class="dot-line"></span></td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td class="lbl">গুগল ম্যাপ স্থানাঙ্ক / পিন:</td>
-                  <td colspan="3"><span class="dot-line"></span></td>
+                  <td colspan="3"></td>
                 </tr>
               </table>
             </div>
@@ -679,7 +644,7 @@
                       <span class="checkbox-item"><span class="box"></span> যাচাইকৃত</span>
                       <span class="checkbox-item"><span class="box"></span> পেন্ডিং</span>
                     </td>
-                    <td><span class="dot-line"></span></td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td>২. খতিয়ান ও মিউটেশন (নামজারি ও DCR)</td>
@@ -687,7 +652,7 @@
                       <span class="checkbox-item"><span class="box"></span> সম্পূর্ণ</span>
                       <span class="checkbox-item"><span class="box"></span> অসম্পূর্ণ</span>
                     </td>
-                    <td><span class="dot-line"></span></td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td>৩. ভূমি উন্নয়ন কর (হাল খাজনা দাখিলা)</td>
@@ -695,7 +660,7 @@
                       <span class="checkbox-item"><span class="box"></span> পরিশোধিত</span>
                       <span class="checkbox-item"><span class="box"></span> বকেয়া</span>
                     </td>
-                    <td><span class="dot-line"></span></td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td>৪. রাজউক / পৌরসভা অনুমোদিত প্ল্যান</td>
@@ -703,7 +668,7 @@
                       <span class="checkbox-item"><span class="box"></span> অনুমোদিত</span>
                       <span class="checkbox-item"><span class="box"></span> প্রক্রিয়াধীন</span>
                     </td>
-                    <td><span class="dot-line"></span></td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td>৫. ডেভেলপারের সাথে রেজিস্টার্ড চুক্তি / পাওয়ার</td>
@@ -711,7 +676,7 @@
                       <span class="checkbox-item"><span class="box"></span> রেজিস্ট্রিকৃত</span>
                       <span class="checkbox-item"><span class="box"></span> প্রযোজ্য নয়</span>
                     </td>
-                    <td><span class="dot-line"></span></td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td>৬. ব্যাংক দায়দেনা / মামলা / নিষেধাজ্ঞা (NEC)</td>
@@ -719,14 +684,14 @@
                       <span class="checkbox-item"><span class="box"></span> নির্ভেজাল</span>
                       <span class="checkbox-item"><span class="box"></span> মর্টগেজ আছে</span>
                     </td>
-                    <td><span class="dot-line"></span></td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td>৭. ফ্ল্যাটের সাথে জমির আনুপাতিক হিস্যা</td>
                     <td style="text-align: left;">
                       <span class="checkbox-item"><span class="box"></span> সাফ-কবলা</span>
                     </td>
-                    <td><span class="dot-line"></span></td>
+                    <td></td>
                   </tr>
                 </tbody>
               </table>
@@ -759,11 +724,6 @@
                 <tr>
                   <td class="lbl">অফিসারের বিশেষ পর্যবেক্ষণ ও নোট:</td>
                   <td colspan="2">
-                    <div class="multi-dot-lines" style="padding: 6px 0;">
-                      <span class="dot-line"></span>
-                      <span class="dot-line"></span>
-                      <span class="dot-line"></span>
-                    </div>
                   </td>
                 </tr>
               </table>
@@ -773,11 +733,11 @@
             <div class="signature-section keep-together">
               <div class="signature-box">
                 <div class="signature-line">তথ্য প্রদানকারী / বিক্রেতা / প্রতিনিধির স্বাক্ষর</div>
-                তারিখ: <span class="inline-dots" style="min-width: 140px;"></span>
+                তারিখ: 
               </div>
               <div class="signature-box">
                 <div class="signature-line">ফিল্ড অফিসার / ট্রায়াম্ফ প্রপার্টি প্রতিনিধির স্বাক্ষর</div>
-                তারিখ: <span class="inline-dots" style="min-width: 140px;"></span>
+                তারিখ: 
               </div>
             </div>
 
